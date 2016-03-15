@@ -27,7 +27,7 @@ public class Carro {
     String marca;
     boolean vendido = false;
     
-    HashMap <Integer, Carro> carros = new HashMap <Integer, Carro>();//<--------- es probable que salga mejor un HashMap
+    HashMap <Integer, Carro> carros = new HashMap <>();
     //Inicia Constructor
 
     public Carro(String marca, String modelo, short año, short velocidadMax, int numeroSerie) {
@@ -78,11 +78,7 @@ public class Carro {
     public void setMarca(String marca) {
         this.marca = marca;
     }
-    /*
-    public void mostrarDatos(){
-        System.out.println("Datos del Carro: \n Marca: " + marca + "\n Modelo: " + modelo + "\n Año: " + año);
-    }
-    */
+
     public void ingresarCarro(String marca, String modelo, short año, short velocidadMax, int numeroSerie){
         Scanner numAut = new Scanner(System.in);
         Scanner car = new Scanner(System.in);
@@ -159,26 +155,8 @@ public class Carro {
             System.out.println("Numero de Serie: " + busquedaCarro.getNumeroSerie());
         }
         else{
-            System.out.println("ID invalida: " + serieBuscar);
+            System.out.println("Serial invalido: " + serieBuscar);
         }
-        
-        /*
-        for (int i = 0; i < carros.size(); i++) {
-            if (c == serieBuscar ){
-                    Carro x = carros.get(i); <-------mmmmmm....
-                    System.out.println("Marca del Carro:");
-                    System.out.println(getMarca());
-                    System.out.println("Modelo:");
-                    System.out.println(getModelo());
-                    System.out.println("Velocidad Maxima (km/h):");
-                    System.out.println(getVelocidadMax());
-                    System.out.println("Año:");
-                    System.out.println(getAño());
-                    System.out.println("Numero de Serie:");
-                    System.out.println(getNumeroSerie());
-            }
-        }
-        */
     }
     
     public void venderCarro(){
