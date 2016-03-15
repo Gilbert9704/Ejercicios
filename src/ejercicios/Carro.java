@@ -27,7 +27,7 @@ public class Carro {
     String marca;
     boolean vendido = false;
     
-    ArrayList <Carro> carros = new ArrayList <Carro>();
+    HashMap <Integer, Carro> carros = new HashMap <Integer, Carro>();//<--------- es probable que salga mejor un HashMap
     //Inicia Constructor
 
     public Carro(String marca, String modelo, short año, short velocidadMax, int numeroSerie) {
@@ -117,12 +117,17 @@ public class Carro {
                     setNumeroSerie(numeroSerie);
                     System.out.println();
                     
-                    carros.add(new Carro(marca, modelo, año, velocidadMax, numeroSerie));
+                    if (carros.containsKey(numeroSerie)){
+                        System.out.println("El numero de serie del carro ya existe, Rectifique e intente de nuevo");
+                    }
+                    else{ 
+                    carros.put(numeroSerie, new Carro(marca, modelo, año, velocidadMax, numeroSerie));
+                    }
                 }
     }
     
     public void comprobarListado(){
-            for (Carro automovil : carros){
+            for (Carro automovil : carros.values()){
                     System.out.println();
                     System.out.println("Marca del Carro:");
                     System.out.println(automovil.getMarca());
@@ -144,8 +149,23 @@ public class Carro {
         System.out.println("Ingrese el numero de serie del Carro a buscar");
         serieBuscar = busqueda.nextInt();
         
+        Carro busquedaCarro = carros.get(serieBuscar);
+        
+        if (busquedaCarro != null){
+            System.out.println("Marca: " + busquedaCarro.getMarca());
+            System.out.println("Modelo: " + busquedaCarro.getModelo());
+            System.out.println("Velocidad Maxima (km/h): " + busquedaCarro.getVelocidadMax());
+            System.out.println("Año: " + busquedaCarro.getAño());
+            System.out.println("Numero de Serie: " + busquedaCarro.getNumeroSerie());
+        }
+        else{
+            System.out.println("ID invalida: " + serieBuscar);
+        }
+        
+        /*
         for (int i = 0; i < carros.size(); i++) {
-            if (getNumeroSerie() == serieBuscar ){
+            if (c == serieBuscar ){
+                    Carro x = carros.get(i); <-------mmmmmm....
                     System.out.println("Marca del Carro:");
                     System.out.println(getMarca());
                     System.out.println("Modelo:");
@@ -158,6 +178,7 @@ public class Carro {
                     System.out.println(getNumeroSerie());
             }
         }
+        */
     }
     
     public void venderCarro(){
