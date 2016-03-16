@@ -10,7 +10,7 @@ package ejercicios;
  * @author User
  */
 public class Bloques {
-    
+    //Bloques
     public static void main(String[] args){
         int x = 0;
         int y = 0;
