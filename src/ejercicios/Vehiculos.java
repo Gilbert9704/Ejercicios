@@ -28,19 +28,18 @@ public class Vehiculos {
         short velMax = 0;
         short añoAuto = 0;
         int numSerieAuto = 0;
-        
-        
-        
+        boolean venderAuto = false;
+            
         Scanner accion = new Scanner(System.in);
         
-        Carro c = new Carro(marcaAuto, modeloAuto, añoAuto, velMax, numSerieAuto);
+        Carro c = new Carro(marcaAuto, modeloAuto, añoAuto, velMax, numSerieAuto, venderAuto);
         
         do{
             System.out.println(" CONCESIONARIO \n ¿Que desea Realizar? \n 1-Ingresar Autos \n 2-Mostrar Listado de Autos \n 3-Buscar Auto \n 4-Vender Auto");
             comando = accion.nextByte();
                 switch (comando) {
                 case 1:
-                    c.ingresarCarro(marcaAuto, modeloAuto, añoAuto, velMax, numSerieAuto);
+                    c.ingresarCarro(marcaAuto, modeloAuto, añoAuto, velMax, numSerieAuto, venderAuto);
                 break;
                 
                 case 2:
@@ -52,7 +51,7 @@ public class Vehiculos {
                 break;
                 
                 case 4:
-                    
+                    c.venderCarro();
                 break;
                 
                 default:

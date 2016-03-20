@@ -26,16 +26,17 @@ public class Carro {
     String modelo;
     String marca;
     boolean vendido = false;
-    
+    //Me esta vendidendo los Autos TODOS!!!! El Unico Problemilla
     HashMap <Integer, Carro> carros = new HashMap <>();
+    
     //Inicia Constructor
-
-    public Carro(String marca, String modelo, short año, short velocidadMax, int numeroSerie) {
+    public Carro(String marca, String modelo, short año, short velocidadMax, int numeroSerie, boolean vendido) {
         this.año = año;
         this.modelo = modelo;
         this.marca = marca;
         this.velocidadMax = velocidadMax;
         this.numeroSerie = numeroSerie;
+        this.vendido = vendido;
     }
     //Finaliza Constructor
 
@@ -79,7 +80,16 @@ public class Carro {
         this.marca = marca;
     }
 
-    public void ingresarCarro(String marca, String modelo, short año, short velocidadMax, int numeroSerie){
+    public boolean isVendido() {
+        return vendido;
+    }
+
+    public void setVendido(boolean vendido) {
+        this.vendido = vendido;
+    }
+    
+
+    public void ingresarCarro(String marca, String modelo, short año, short velocidadMax, int numeroSerie, boolean vendido){
         Scanner numAut = new Scanner(System.in);
         Scanner car = new Scanner(System.in);
         Scanner model = new Scanner(System.in);
@@ -112,30 +122,67 @@ public class Carro {
                     numeroSerie = serie.nextInt();
                     setNumeroSerie(numeroSerie);
                     System.out.println();
+                //El carro se declara como disponible, siempre que se crea
+                    vendido = false;
                     
+                //El condicional Verifica si ya existe el numero de serie ingresado.
                     if (carros.containsKey(numeroSerie)){
                         System.out.println("El numero de serie del carro ya existe, Rectifique e intente de nuevo");
                     }
                     else{ 
-                    carros.put(numeroSerie, new Carro(marca, modelo, año, velocidadMax, numeroSerie));
+                    carros.put(numeroSerie, new Carro(marca, modelo, año, velocidadMax, numeroSerie, vendido));
                     }
                 }
     }
     
     public void comprobarListado(){
-            for (Carro automovil : carros.values()){
-                    System.out.println();
-                    System.out.println("Marca del Carro:");
-                    System.out.println(automovil.getMarca());
-                    System.out.println("Modelo:");
-                    System.out.println(automovil.getModelo());
-                    System.out.println("Velocidad Maxima (km/h):");
-                    System.out.println(automovil.getVelocidadMax());
-                    System.out.println("Año:");
-                    System.out.println(automovil.getAño());
-                    System.out.println("Numero de Serie:");
-                    System.out.println(automovil.getNumeroSerie());
-            }
+            byte decidirLista = 0;
+            Scanner lista = new Scanner(System.in);
+            
+            System.out.println("¿Que lista desea ver? \n (1)Carros Disponibles \n (2)Carros Vendidos");
+            decidirLista = lista.nextByte();
+                      
+        switch (decidirLista) {
+            case 1:
+                for (Carro automovil : carros.values()){
+                    if (automovil.isVendido() == false){
+                        System.out.println();
+                        System.out.println("Marca del Carro:");
+                        System.out.println(automovil.getMarca());
+                        System.out.println("Modelo:");
+                        System.out.println(automovil.getModelo());
+                        System.out.println("Velocidad Maxima (km/h):");
+                        System.out.println(automovil.getVelocidadMax());
+                        System.out.println("Año:");
+                        System.out.println(automovil.getAño());
+                        System.out.println("Numero de Serie:");
+                        System.out.println(automovil.getNumeroSerie());
+                    }
+                }
+                break;
+                
+            case 2:
+                for (Carro automovil : carros.values()){
+                    if(automovil.isVendido() == true){
+                        System.out.println();
+                        System.out.println("Marca del Carro:");
+                        System.out.println(automovil.getMarca());
+                        System.out.println("Modelo:");
+                        System.out.println(automovil.getModelo());
+                        System.out.println("Velocidad Maxima (km/h):");
+                        System.out.println(automovil.getVelocidadMax());
+                        System.out.println("Año:");
+                        System.out.println(automovil.getAño());
+                        System.out.println("Numero de Serie:");
+                        System.out.println(automovil.getNumeroSerie());
+                    }
+                }
+                break;
+                
+            default:
+                System.out.println("No se Encontraron Autos Vendidos");
+                break;
+        }
     }
     
     public void buscarCarro(){
@@ -153,21 +200,45 @@ public class Carro {
             System.out.println("Velocidad Maxima (km/h): " + busquedaCarro.getVelocidadMax());
             System.out.println("Año: " + busquedaCarro.getAño());
             System.out.println("Numero de Serie: " + busquedaCarro.getNumeroSerie());
+            if (vendido == false){
+                System.out.println("Estado: Disponible");
+            }else{
+                System.out.println("Estado: Vendido ");
+            }
         }
-        else{
+        else{ 
             System.out.println("Serial invalido: " + serieBuscar);
         }
     }
-    
+    //volver a mirar los parametros, cambiarlos aqui y probar
     public void venderCarro(){
-        vendido = true;
+        int autoDisponible = 0;
+        byte venderCarro_1 = 0;
+        Scanner buscarDisponible = new Scanner(System.in);
+        Scanner carroVendido = new Scanner(System.in);
+        
+        System.out.println("Ingrese el numero de Serie del Carro a vender");
+        autoDisponible = buscarDisponible.nextInt();
+        
+        Carro disponible = carros.get(autoDisponible);
+        
+        if (disponible != null && disponible.isVendido() == false){
+            System.out.println("Marca: " + disponible.getMarca());
+            System.out.println("Modelo: " + disponible.getModelo());
+            System.out.println("Velocidad Maxima (km/h): " + disponible.getVelocidadMax());
+            System.out.println("Año: " + disponible.getAño());
+            System.out.println("Numero de Serie: " + disponible.getNumeroSerie());
+            
+            System.out.println("\n ¿Vender Auto? SI(1)/NO(0)");
+            venderCarro_1 = carroVendido.nextByte();
+            if(venderCarro_1 == 1){
+               vendido = true;
+               disponible.setVendido(vendido);
+            }
+        }
+        else{
+            System.out.println("Serial invalido: " + autoDisponible);
+        }
     }
     
-    public void comprobarVenta(){
-        if (vendido == true){
-            System.out.println("El Carro ha sido Vendido");
-        }else{
-            System.out.println("El Carro se encuentra disponible");
-        }
-    }   
 }
