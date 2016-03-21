@@ -29,6 +29,7 @@ public class Vehiculos {
         short añoAuto = 0;
         int numSerieAuto = 0;
         boolean venderAuto = false;
+        
             
         Scanner accion = new Scanner(System.in);
         
@@ -51,7 +52,7 @@ public class Vehiculos {
                 break;
                 
                 case 4:
-                    c.venderCarro();
+                    c.venderCarro(venderAuto);
                 break;
                 
                 default:

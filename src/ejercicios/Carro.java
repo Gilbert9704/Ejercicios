@@ -26,7 +26,7 @@ public class Carro {
     String modelo;
     String marca;
     boolean vendido = false;
-    //Me esta vendidendo los Autos TODOS!!!! El Unico Problemilla
+
     HashMap <Integer, Carro> carros = new HashMap <>();
     
     //Inicia Constructor
@@ -136,11 +136,11 @@ public class Carro {
     }
     
     public void comprobarListado(){
-            byte decidirLista = 0;
-            Scanner lista = new Scanner(System.in);
+        byte decidirLista = 0;
+        Scanner lista = new Scanner(System.in);
             
-            System.out.println("¿Que lista desea ver? \n (1)Carros Disponibles \n (2)Carros Vendidos");
-            decidirLista = lista.nextByte();
+        System.out.println("¿Que lista desea ver? \n (1)Carros Disponibles \n (2)Carros Vendidos");
+        decidirLista = lista.nextByte();
                       
         switch (decidirLista) {
             case 1:
@@ -159,7 +159,7 @@ public class Carro {
                         System.out.println(automovil.getNumeroSerie());
                     }
                 }
-                break;
+            break;
                 
             case 2:
                 for (Carro automovil : carros.values()){
@@ -177,11 +177,11 @@ public class Carro {
                         System.out.println(automovil.getNumeroSerie());
                     }
                 }
-                break;
+            break;
                 
             default:
-                System.out.println("No se Encontraron Autos Vendidos");
-                break;
+                System.out.println("No se Encontraron Autos");
+            break;
         }
     }
     
@@ -200,7 +200,7 @@ public class Carro {
             System.out.println("Velocidad Maxima (km/h): " + busquedaCarro.getVelocidadMax());
             System.out.println("Año: " + busquedaCarro.getAño());
             System.out.println("Numero de Serie: " + busquedaCarro.getNumeroSerie());
-            if (vendido == false){
+            if (busquedaCarro.isVendido() == false){
                 System.out.println("Estado: Disponible");
             }else{
                 System.out.println("Estado: Vendido ");
@@ -210,8 +210,8 @@ public class Carro {
             System.out.println("Serial invalido: " + serieBuscar);
         }
     }
-    //volver a mirar los parametros, cambiarlos aqui y probar
-    public void venderCarro(){
+    
+    public void venderCarro(boolean vendido){
         int autoDisponible = 0;
         byte venderCarro_1 = 0;
         Scanner buscarDisponible = new Scanner(System.in);
@@ -232,8 +232,8 @@ public class Carro {
             System.out.println("\n ¿Vender Auto? SI(1)/NO(0)");
             venderCarro_1 = carroVendido.nextByte();
             if(venderCarro_1 == 1){
-               vendido = true;
-               disponible.setVendido(vendido);
+                vendido = true;
+                disponible.setVendido(vendido);
             }
         }
         else{
