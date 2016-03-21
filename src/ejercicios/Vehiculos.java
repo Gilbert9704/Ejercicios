@@ -38,7 +38,8 @@ public class Vehiculos {
         do{
             System.out.println(" CONCESIONARIO \n ¿Que desea Realizar? \n 1-Ingresar Autos \n 2-Mostrar Listado de Autos \n 3-Buscar Auto \n 4-Vender Auto");
             comando = accion.nextByte();
-                switch (comando) {
+            
+            switch (comando) {
                 case 1:
                     c.ingresarCarro(marcaAuto, modeloAuto, añoAuto, velMax, numSerieAuto, venderAuto);
                 break;
