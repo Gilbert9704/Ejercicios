@@ -4,64 +4,81 @@
  * and open the template in the editor.
  */
 package ejercicios; 
-
-import java.util.*;
 /**
  *<h1>Algoritmo Concesionario</h1>
  * Algoritmo que me permite realizar un registro y gestionar la informacion
  * sobre los carros de un concesionario.
  * 
  * @author Gilbert Angulo Saucedo
- * @version 1.0
+ * @version 2.0
  * @since 12/03/2016 (DD/MM/AA)
  * 
  */
+
 public class Vehiculos {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        String marcaAuto = null;
-        String modeloAuto = null;
-        byte comando = 0;
-        short velMax = 0;
-        short añoAuto = 0;
-        int numSerieAuto = 0;
-        boolean venderAuto = false;
-        
-            
-        Scanner accion = new Scanner(System.in);
-        
-        Carro c = new Carro(marcaAuto, modeloAuto, añoAuto, velMax, numSerieAuto, venderAuto);
-        
-        do{
-            System.out.println(" CONCESIONARIO \n ¿Que desea Realizar? \n 1-Ingresar Autos \n 2-Mostrar Listado de Autos \n 3-Buscar Auto \n 4-Vender Auto");
-            comando = accion.nextByte();
-            
-            switch (comando) {
-                case 1:
-                    c.ingresarCarro(marcaAuto, modeloAuto, añoAuto, velMax, numSerieAuto, venderAuto);
-                break;
-                
-                case 2:
-                    c.comprobarListado();
-                break;
-                    
-                case 3:
-                    c.buscarCarro();
-                break;
-                
-                case 4:
-                    c.venderCarro(venderAuto);
-                break;
-                
-                default:
-                
-                break;
-                }
-        }while (comando <= 4);
-        
+    protected short velocidadMax;
+    protected short año;
+    protected int numeroSerie = 0;
+    protected String modelo;
+    protected String marca;
+    protected boolean vendido = false;
+
+    public Vehiculos(String marca, String modelo, short año, short velocidadMax, int numeroSerie, boolean vendido) {
+        this.año = año;
+        this.modelo = modelo;
+        this.marca = marca;
+        this.velocidadMax = velocidadMax;
+        this.numeroSerie = numeroSerie;
+        this.vendido = vendido;
+    }
+    
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+    
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+    
+    public short getAño() {
+        return año;
+    }
+
+    public void setAño(short año) {
+        this.año = año;
+    }
+
+    public short getVelocidadMax() {
+        return velocidadMax;
+    }
+
+    public void setVelocidadMax(short velocidadMax) {
+        this.velocidadMax = velocidadMax;
+    }
+    
+    public int getNumeroSerie() {
+        return numeroSerie;
+    }
+
+    public void setNumeroSerie(int numeroSerie) {
+        this.numeroSerie = numeroSerie;
+    }
+    
+    public boolean isVendido() {
+        return vendido;
+    }
+
+    public void setVendido(boolean vendido) {
+        this.vendido = vendido;
     }
     
 }
